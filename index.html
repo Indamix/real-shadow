@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>Real Shadow</title>
+	<link rel="stylesheet" href="main.css"/>
+</head>
+<body>
+	<div class="container">
+		<h1>Real Shadows</h1>
+		by <a href="https://github.com/Indamix/">Indamix</a>
+		<p>Move the mouse cursor across the page</p>
+		<div class="demo"></div>
+	</div>
+
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="realshadow.js"></script>
+	<script type="text/javascript">
+	$(function(){
+
+		var a = ['rect', 'circle', 'round', 'ur', 'll'],
+			c = ['', 'r', 'g', 'b', 'rgb', 'rg', 'gb', 'br'],
+			columns = rows = 6,
+			s = '', i, j;
+
+		for (i = 0; i < columns; ++i){
+			s += '<p>';	
+			for (j = 0; j < rows; ++j)
+				s += '<span rel="x' +
+					c[(i * columns + j) % c.length] +
+					'" class="realshadow block ' +
+					a[(i * columns + j) % a.length] +
+					' c' +
+					c[(i * columns + j) % c.length] +
+					'"></span>';
+			s += '</p>';
+		}
+
+		$('.demo').html('<div class="wrapper">' + s + '</div>')
+
+		shadows($('.realshadow'));
+
+	});
+	</script>
+</body>
+</html>
