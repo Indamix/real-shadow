@@ -1,0 +1,1 @@
+{"name":"Real Shadow","body":"### Real Shadow\r\n\r\n\r\n```\r\nshadows($('.realshadow'));\r\n```\r\n\r\nTODO\r\n\r\nshadow follows mouse as an option\r\n\r\nwrap into jQuery plugin\r\n\r\n...","tagline":"","google":"","note":"Don't delete this file! It's used internally to help with page regeneration."}
