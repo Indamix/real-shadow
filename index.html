@@ -5,7 +5,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Real Shadows</h1>
+		<h1>Real Shadow</h1>
 		by <a href="https://github.com/Indamix/">Indamix</a>
 		<p>Move the mouse cursor across the page</p>
 		<div class="demo"></div>
@@ -36,7 +36,9 @@
 
 		$('.demo').html('<div class="wrapper">' + s + '</div>')
 
-		shadows($('.realshadow'));
+		$('.realshadow').realshadow({
+			// followMouse: false
+		});
 
 	});
 	</script>

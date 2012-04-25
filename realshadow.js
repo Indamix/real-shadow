@@ -1,23 +1,25 @@
 /*! Real Shadow | https://github.com/Indamix/real-shadow */
 
-var shadows = (function(undefined){
-	var shadows = function($els, options){
-			init($els, options);
-			// TODO add fn(height) to pass shape form
-		},
-		settings,
+(function($, undefined){
+
+	// TODO add fn(height) to pass shape form
+	var settings = {
+		followMouse: true,
+	},
 		pi = Math.PI,
 		els = [];
 
-	function init($els, options){
-		settings = $.extend({}, options, settings);
-		if (!els.length) $(document.body).mousemove(frame);
-		add($els);
+	$.fn.realshadow = function(options){
+		$.extend(settings, options);
+		if (!els.length && settings.followMouse) $(document.body).mousemove(frame);
+		add(this);
 		frame({
 			pageX: settings.pageX !== undefined ? settings.pageX : $(window).width() >> 1,
 			pageY: settings.pageY !== undefined ? settings.pageY : 0
 		});
-	}
+		
+	};
+	$.fn.realshadow.frame=frame; //TODO
 
 	function add($els){
 		$.each($els, function(i, el){
@@ -102,8 +104,4 @@ var shadows = (function(undefined){
 		}
 	}
 
-	shadows.frame=frame;
-
-	return shadows;
-
-})();
+})(jQuery);
