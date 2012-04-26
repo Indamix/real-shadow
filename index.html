@@ -1,9 +1,18 @@
+<!DOCTYPE html>
 <html>
-<head>
-	<title>Real Shadow</title>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
 	<link rel="stylesheet" href="main.css"/>
-</head>
-<body>
+    <title>Real Shadow: jQuery Plugin</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/Indamix/real-shadow">Fork Me on GitHub</a>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-text="Real Shadow: jQuery Plugin" data-size="large">Tweet</a>
+
+
 	<div class="container">
 		<h1>Real Shadow</h1>
 		by <a href="https://github.com/Indamix/">Indamix</a>
@@ -24,7 +33,7 @@
 		for (i = 0; i < columns; ++i){
 			s += '<p>';	
 			for (j = 0; j < rows; ++j)
-				s += '<span rel="x' +
+				s += '<span rel="' +
 					c[(i * columns + j) % c.length] +
 					'" class="realshadow block ' +
 					a[(i * columns + j) % a.length] +
@@ -42,5 +51,8 @@
 
 	});
 	</script>
-</body>
+
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    
+  </body>
 </html>
