@@ -58,8 +58,15 @@ a#forkme_banner:hover {
   background-position: 0 -138px;
 }
 
-.twitter-share-button {
+.twitter-share-button, .twitter-follow-button {
 	position: absolute;
-	top: 10px;
-	right: 10px
+	left: 10px
+}
+
+.twitter-share-button {
+	top: 140px;
+}
+
+.twitter-follow-button {
+	top: 180px;
 }
