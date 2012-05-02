@@ -58,8 +58,8 @@ a#forkme_banner:hover {
   background-position: 0 -138px;
 }
 
-.twitter-share-button, .twitter-follow-button {
-	position: absolute;
+.twitter-share-button, .twitter-follow-button, .IN-widget, .fb-like {
+	position: absolute!important;
 	left: 10px
 }
 
@@ -68,5 +68,13 @@ a#forkme_banner:hover {
 }
 
 .twitter-follow-button {
-	top: 180px;
+	top: 190px;
+}
+
+.fb-like {
+	top: 240px;
+}
+
+.IN-widget {
+	top: 285px;
 }
