@@ -6,18 +6,20 @@
  * Licensed under the MIT license
  * https://raw.github.com/Indamix/real-shadow/master/license.txt
  */
-(function($, undefined){
+(function($, window, undefined){
 
 	// TODO add fn(height) to pass shape form
 	var settings = {
-		followMouse: true,
-	},
+			followMouse: true,
+		},
 		pi = Math.PI,
 		els = [];
 
 	$.fn.realshadow = function(options){
 		$.extend(settings, options);
 		if (!els.length && settings.followMouse) $(document.body).mousemove(frame);
+		$(window).resize(updatePositions);
+
 		add(this);
 		frame({
 			pageX: settings.pageX !== undefined ? settings.pageX : $(window).width() >> 1,
@@ -25,18 +27,18 @@
 		});
 		
 	};
-	$.fn.realshadow.frame=frame; //TODO
+	// $.fn.realshadow.frame=frame; //TODO
 
 	function add($els){
 		$.each($els, function(i, el){
 			var $el = $(el),
 				offset = $el.offset(),
+				c = $el.attr('rel'),
 				p = {
 					dom: el,
-					x: offset.left + ($el.outerWidth()  >> 1),
+					x: offset.left + ($el.outerWidth () >> 1),
 					y: offset.top  + ($el.outerHeight() >> 1)
-				},
-				c = $(el).attr('rel');
+				};
 
 			if (c)
 				p.c = {
@@ -48,9 +50,20 @@
 				if (settings.c) p.c = settings.c;
 
 			els.push(p);
+		});
+	}
 
-		})
-		// log('els',els)
+	function updatePositions(){
+		var i = els.length,
+			offset,
+			el;
+
+		while (i--) {
+			el = els[i];
+			offset = $(el.dom).offset();
+			el.x = offset.left;
+			el.y = offset.top;
+		}
 	}
 
 	function castShadows(el, angle, n, height){
@@ -110,4 +123,4 @@
 		}
 	}
 
-})(jQuery);
+})(jQuery, this);
