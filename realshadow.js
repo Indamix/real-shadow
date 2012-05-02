@@ -1,5 +1,11 @@
-/*! Real Shadow | https://github.com/Indamix/real-shadow */
-
+/*!
+ * Real Shadow v1.0.1
+ * https://github.com/Indamix/real-shadow
+ *
+ * Copyright 2012, Ivan Indamix
+ * Licensed under the MIT license
+ * https://raw.github.com/Indamix/real-shadow/master/license.txt
+ */
 (function($, undefined){
 
 	// TODO add fn(height) to pass shape form
