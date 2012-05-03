@@ -1,5 +1,6 @@
 # [Real Shadow](http://indamix.github.com/real-shadow/) - jQuery Plugin that casts photorealistic shadows
-Works in any browser supporting CSS box-shadow property
+Perfect for eye-catching demos and landing pages.
+Works in any browser supporting CSS box-shadow property.
 
 ## Basic Usage
 
@@ -28,5 +29,6 @@ To specify different colors for each element, you can use "rel" attribute:
 	<span rel="rg"></span>
 	<span rel="gb"></span>
 	<span rel="br"></span>
+	<span rel="rgb"></span>
 
 	$('span').realshadow();
