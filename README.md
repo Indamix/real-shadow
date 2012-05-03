@@ -1,5 +1,6 @@
 # [Real Shadow](http://indamix.github.com/real-shadow/) - jQuery Plugin that casts photorealistic shadows
 Perfect for eye-catching demos and landing pages.
+
 Works in any browser supporting CSS box-shadow property.
 
 ## Basic Usage
