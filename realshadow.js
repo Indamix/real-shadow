@@ -73,7 +73,7 @@
 			cos = Math.cos(angle),
 			sin = Math.sin(angle),
 			r;
-		for (var i = 0; i < height; ++i) {
+		for (var i = 1; i < height; ++i) {
 			r = Math.pow(i, n);
 			// TODO      add ---^ + shadow distance
 			shadows.push(
