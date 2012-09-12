@@ -68,10 +68,16 @@
 			s += '</p>';
 		}
 
-		$('.demo').html('<div class="wrapper">' + s + '</div>')
+		$('.demo')
+			.append('<div class="wrapper">' + s + '</div>')
+			.append('<div class="inset block big">Inset shadows are supported as well<div/>');
 
 		$('.realshadow').realshadow({
 			// followMouse: false
+		});
+
+		$('.inset').realshadow({
+			inset: true
 		});
 
 	});

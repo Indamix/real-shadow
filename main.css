@@ -28,6 +28,14 @@ a {
 	height:50px;
 }
 
+.big {
+	width: 380px;
+	height: 100px;
+	line-height: 100px;
+	margin-bottom: 200px;
+	border-radius: 10px;
+}
+
 .c  {background:rgba(193,193,193,.5)}
 .cr {background:rgba(255,0,0,.5)}
 .cg {background:rgba(0,200,0,.5)}
