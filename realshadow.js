@@ -49,6 +49,8 @@
 			else
 				if (settings.c) p.c = settings.c;
 
+			p.inset = settings.inset ? 'inset' : '';
+
 			els.push(p);
 		});
 	}
@@ -88,7 +90,7 @@
 				:
 					'0,0,0,'
 				) +
-				'.05)'
+				'.05)' + el.inset
 			);
 		}
 
