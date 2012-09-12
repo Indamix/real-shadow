@@ -39,3 +39,11 @@ To specify different colors for each element, you can use "rel" attribute:
 ```javascript
 $('span').realshadow();
 ```
+
+## Inset Shadows
+
+```javascript
+$(selector).realshadow({
+	inset: true
+});
+```
