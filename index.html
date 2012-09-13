@@ -17,10 +17,19 @@
 	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	  })();
 	</script>
+    <script type="text/javascript">
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+	</script>
   </head>
 
   <body>
-  	<div style="position:absolute;right:0;top:180px">
+  	<div class="rffdgad">
 		<script type="text/javascript"><!--
 			google_ad_client = "ca-pub-6894164412105950";
 			/* Vertical GH */
@@ -32,7 +41,17 @@
 		<script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 	</div>
+
     <a id="forkme_banner" href="https://github.com/Indamix/real-shadow">Fork Me on GitHub</a>
+
+    <div class="flattr">
+	    <a class="FlattrButton" style="display:none;" href="http://indamix.github.com/real-shadow/"></a>
+		<noscript>
+			<a href="http://flattr.com/thing/884173/Real-Shadow" target="_blank">
+				<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" />
+			</a>
+		</noscript>
+    </div>
 
 	<a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
 	<a href="https://twitter.com/indamix" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @indamix</a>

@@ -50,6 +50,12 @@ a {
 .ur {border-radius:5px 50px 5px 5px}
 .ll {border-radius:5px 5px 5px 50px}
 
+.rffdgad {
+	position: absolute;
+	right: 10px;
+	top:  183px;
+}
+
 a#forkme_banner {
   position: absolute;
   top: 0;
@@ -66,23 +72,12 @@ a#forkme_banner:hover {
   background-position: 0 -138px;
 }
 
-.twitter-share-button, .twitter-follow-button, .IN-widget, .fb-like {
+.flattr, .twitter-share-button, .twitter-follow-button, .IN-widget, .fb-like {
 	position: absolute!important;
-	left: 10px
+	left: 10px;
 }
-
-.twitter-share-button {
-	top: 140px;
-}
-
-.twitter-follow-button {
-	top: 190px;
-}
-
-.IN-widget {
-	top: 240px;
-}
-
-.fb-like {
-	top: 280px;
-}
+.flattr                { top: 140px }
+.twitter-share-button  { top: 215px }
+.twitter-follow-button { top: 255px }
+.IN-widget             { top: 295px }
+.fb-like               { top: 328px }
