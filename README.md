@@ -3,6 +3,12 @@ Perfect for eye-catching demos and landing pages.
 
 Works in any browser supporting CSS box-shadow property.
 
+## What's new in v1.1.0
++ possibility to update shadows during/after jQuery animations
++ inset shadows
++ optimizations
++ corrected shadow positions
+
 ## Basic Usage
 
 ```javascript
@@ -47,3 +53,19 @@ $(selector).realshadow({
 	inset: true
 });
 ```
+
+### Update shadows during/after jQuery animations
+```javascript
+	// before: apply Real Shadow to elements:
+	$(selector).realshadow(/* options, if needed */);
+
+	// update shadows during jQuery animation, i.e. each animation step:
+	$(selector).animate(/* animated properties */, {step: $.fn.realshadow.update});
+
+	// update shadows after jQuery animation is over:
+	$(selector).animate(/* animated properties */, $.fn.realshadow.update);
+```
+If you update shadows during jQuery animation, you don't need to update shadows after jQuery animation is over.
+
+
+If you suppose that the usage of Real Shadow is unclear, feel free to contact me.
