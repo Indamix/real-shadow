@@ -1,5 +1,5 @@
 /*!
- * Real Shadow v1.0.1
+ * Real Shadow v1.1.0
  * https://github.com/Indamix/real-shadow
  *
  * Copyright 2012, Ivan Indamix
@@ -12,60 +12,57 @@
 	var settings = {
 			followMouse: true,
 		},
+		$window = $(window),
 		pi = Math.PI,
 		els = [];
 
 	$.fn.realshadow = function(options){
 		$.extend(settings, options);
 		if (!els.length && settings.followMouse) $(document.body).mousemove(frame);
-		$(window).resize(updatePositions);
-
-		add(this);
-		frame({
-			pageX: settings.pageX !== undefined ? settings.pageX : $(window).width() >> 1,
-			pageY: settings.pageY !== undefined ? settings.pageY : 0
-		});
-		
+		$window.resize(update);
+		$.each(this, add);
+		frame();
 	};
-	// $.fn.realshadow.frame=frame; //TODO
 
-	function add($els){
-		$.each($els, function(i, el){
-			var $el = $(el),
-				offset = $el.offset(),
-				c = $el.attr('rel'),
-				p = {
-					dom: el,
-					x: offset.left + ($el.outerWidth () >> 1),
-					y: offset.top  + ($el.outerHeight() >> 1)
-				};
+	$.fn.realshadow.update = update;
 
-			if (c)
-				p.c = {
-					r: c.indexOf('r') !== -1,
-					g: c.indexOf('g') !== -1,
-					b: c.indexOf('b') !== -1
-				}
-			else
-				if (settings.c) p.c = settings.c;
+	function add(i, el){
+		var $el = $(el),
+			offset = $el.offset(),
+			c = $el.attr('rel'),
+			p = {
+				dom: el,
+				x: offset.left + ($el.outerWidth () >> 1),
+				y: offset.top  + ($el.outerHeight() >> 1)
+			};
 
-			p.inset = settings.inset ? 'inset' : '';
+		if (c)
+			p.c = {
+				r: c.indexOf('r') !== -1,
+				g: c.indexOf('g') !== -1,
+				b: c.indexOf('b') !== -1
+			}
+		else
+			if (settings.c) p.c = settings.c;
 
-			els.push(p);
-		});
+		p.inset = settings.inset ? 'inset' : '';
+
+		els.push(p);
 	}
 
-	function updatePositions(){
+	function update(){
 		var i = els.length,
-			offset,
-			el;
+			offset, el, $el;
 
 		while (i--) {
 			el = els[i];
-			offset = $(el.dom).offset();
-			el.x = offset.left;
-			el.y = offset.top;
+			$el = $(el.dom);
+			offset = $el.offset();
+			el.x = offset.left + ($el.outerWidth () >> 1);
+			el.y = offset.top  + ($el.outerHeight() >> 1);
 		}
+
+		frame();
 	}
 
 	function castShadows(el, angle, n, height){
@@ -104,6 +101,11 @@
 	}
 
 	function frame(e){
+		if (e === undefined) e = {
+			pageX: settings.pageX !== undefined ? settings.pageX : $window.width() >> 1,
+			pageY: settings.pageY !== undefined ? settings.pageY : 0
+		};
+
 		var i = els.length,
 			el;
 
