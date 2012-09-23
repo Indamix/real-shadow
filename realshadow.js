@@ -10,7 +10,7 @@
 
 	// TODO add fn(height) to pass shape form
 	var settings = {
-			followMouse: true,
+			followMouse: true
 		},
 		$window = $(window),
 		pi = Math.PI,
