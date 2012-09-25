@@ -3,11 +3,12 @@ Perfect for eye-catching demos and landing pages.
 
 Works in any browser supporting CSS box-shadow property.
 
-## What's new in v1.1.0
+## What's new
 + possibility to update shadows during/after jQuery animations
 + inset shadows
 + optimizations
 + corrected shadow positions
++ chaining support
 
 ## Basic Usage
 

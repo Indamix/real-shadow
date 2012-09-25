@@ -1,5 +1,5 @@
 /*!
- * Real Shadow v1.1.0
+ * Real Shadow v1.1.1
  * https://github.com/Indamix/real-shadow
  *
  * Copyright 2012, Ivan Indamix
@@ -22,6 +22,7 @@
 		$window.resize(update);
 		$.each(this, add);
 		frame();
+		return this;
 	};
 
 	$.fn.realshadow.update = update;
