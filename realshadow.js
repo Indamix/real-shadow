@@ -1,5 +1,5 @@
 /*!
- * Real Shadow v1.1.1
+ * Real Shadow v1.1.2
  * https://github.com/Indamix/real-shadow
  *
  * Copyright 2012, Ivan Indamix
@@ -10,7 +10,8 @@
 
 	// TODO add fn(height) to pass shape form
 	var settings = {
-			followMouse: true
+			followMouse: true,
+			length: 7
 		},
 		$window = $(window),
 		pi = Math.PI,
@@ -66,14 +67,12 @@
 		frame();
 	}
 
-	function castShadows(el, angle, n, height){
-		height = height || 7;
-		// n = n || 2;
+	function castShadows(el, angle, n, length){
 		var shadows = [],
 			cos = Math.cos(angle),
 			sin = Math.sin(angle),
 			r;
-		for (var i = 1; i < height; ++i) {
+		for (var i = 1; i < length; ++i) {
 			r = Math.pow(i, n);
 			// TODO      add ---^ + shadow distance
 			shadows.push(
@@ -99,7 +98,7 @@
 		nMax: 2.3,
 		pow: .8,
 		div: 1500
-	}
+	};
 
 	function frame(e){
 		if (e === undefined) e = {
@@ -123,7 +122,8 @@
 			castShadows(
 				el,
 				Math.atan2(x, y) - pi,
-				n
+				n,
+				settings.length
 			);
 		}
 	}
