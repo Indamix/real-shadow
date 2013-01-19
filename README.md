@@ -1,8 +1,11 @@
 # [Real Shadow](http://indamix.github.com/real-shadow/) — Module that casts photorealistic shadows
 Perfect for eye-catching demos and landing pages.
+
 Works in any browser supporting CSS box-shadow property.
 
+
 Real Shadow registers itself as CommonJS module, AMD module or jQuery plugin (it depends on your environment).
+
 If there is no CommonJS, AMD or jQuery, Real Shadow registers itself in the global namespace.
 
 ## What's new
