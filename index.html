@@ -20,42 +20,36 @@
 		<div class="demo"></div>
 	</div>
 
-	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript" src="https://raw.github.com/Indamix/real-shadow/master/realshadow.js"></script>
 	<script type="text/javascript">
-	$(function(){
+    (function(){
 
-		var a = ['rect', 'circle', 'round', 'ur', 'll'],
-			c = ['', 'r', 'g', 'b', 'rgb', 'rg', 'gb', 'br'],
-			columns = rows = 6,
-			s = '', i, j;
+        var a = ['rect', 'circle', 'round', 'ur', 'll'],
+                c = ['', 'r', 'g', 'b', 'rgb', 'rg', 'gb', 'br'],
+                columns = rows = 6,
+                s = '', i, j;
 
-		for (i = 0; i < columns; ++i){
-			s += '<p>';	
-			for (j = 0; j < rows; ++j)
-				s += '<span rel="' +
-					c[(i * columns + j) % c.length] +
-					'" class="realshadow block ' +
-					a[(i * columns + j) % a.length] +
-					' c' +
-					c[(i * columns + j) % c.length] +
-					'"></span>';
-			s += '</p>';
-		}
+        for (i = 0; i < columns; ++i){
+            s += '<p>';
+            for (j = 0; j < rows; ++j)
+                s += '<span rel="' +
+                        c[(i * columns + j) % c.length] +
+                        '" class="realshadow block ' +
+                        a[(i * columns + j) % a.length] +
+                        ' c' +
+                        c[(i * columns + j) % c.length] +
+                        '"></span>';
+            s += '</p>';
+        }
 
-		$('.demo')
-			.append('<div class="wrapper">' + s + '</div>')
-			.append('<div class="inset block big">Inset shadows are supported as well<div/>');
+        document.getElementsByClassName('demo')[0].innerHTML =
+                '<div class="wrapper">' + s + '</div>' +
+                        '<div class="inset block big">Inset shadows are supported as well<div/>';
 
-		$('.realshadow').realshadow({
-			// followMouse: false
-		});
+        realshadow(document.getElementsByClassName('realshadow'));
+        realshadow(document.getElementsByClassName('inset'), {inset: true});
 
-		$('.inset').realshadow({
-			inset: true
-		});
-
-	});
+    })();
 	</script>
 
 	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
