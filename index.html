@@ -1,117 +1,124 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="keywords" content="jquery shadow,real shadow,jquery shadow plugin,shadow jquery,jquery shadows,HTML5,CSS3"/>
+    <meta name="keywords"
+          content="jquery shadow,real shadow,jquery shadow plugin,shadow jquery,jquery shadows,HTML5,CSS3"/>
     <meta name="description" content="Real Shadow: Photorealistic Shadows in JavaScript"/>
-    <meta name="viewport" content="width=640" />
+    <meta name="viewport" content="width=640"/>
     <link rel="stylesheet" href="main.css"/>
     <title>Real Shadow: Photorealistic Shadows</title>
     <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-3667863-8']);
-      _gaq.push(['_trackPageview']);
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-3667863-8']);
+        _gaq.push(['_trackPageview']);
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
     </script>
-    <script type="text/javascript">
-    (function() {
-        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-        t.parentNode.insertBefore(s, t);
-    })();
-    </script>
-  </head>
+</head>
+<body>
+<a id="forkme_banner" href="https://github.com/Indamix/real-shadow">Fork Me on GitHub</a>
 
-  <body>
-      <div class="rffdgad">
-        <script type="text/javascript"><!--
-            google_ad_client = "ca-pub-6894164412105950";
-            /* Vertical GH */
-            google_ad_slot = "2985204296";
-            google_ad_width = 120;
-            google_ad_height = 600;
-            //-->
-        </script>
-        <script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-    </div>
+<a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
+<a href="https://twitter.com/indamix" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @indamix</a>
 
-    <a id="forkme_banner" href="https://github.com/Indamix/real-shadow">Fork Me on GitHub</a>
+<script type="IN/Share" data-url="http://indamix.github.com/real-shadow/" data-counter="right"></script>
 
-    <div class="flattr">
-        <a class="FlattrButton" style="display:none" href="http://indamix.github.com/real-shadow/"></a>
-        <noscript>
-            <a href="http://flattr.com/thing/884173/Real-Shadow" target="_blank">
-                <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" />
-            </a>
-        </noscript>
-    </div>
+<div id="fb-root"></div>
+<script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://indamix.github.com/real-shadow/" data-send="false" data-width="200" data-show-faces="true"></div>
 
-    <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
-    <a href="https://twitter.com/indamix" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @indamix</a>
+<div class="container">
+    <h1>Real Shadow</h1>
+    by <a href="http://indamix.github.com/">Indamix</a>
+    <p>Module that casts photorealistic shadows. Perfect for eye-catching demos and landing pages.</p>
+    <p>Move the mouse cursor across the page</p>
+    <div class="demo"></div>
+</div>
 
-    <script type="IN/Share" data-url="http://indamix.github.com/real-shadow/" data-counter="right"></script>
+<script type="text/javascript" src="js/realshadow.js"></script>
+<script type="text/javascript">
+(function () {
 
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    <div class="fb-like" data-href="http://indamix.github.com/real-shadow/" data-send="false" data-width="200" data-show-faces="true"></div>
+    var shapes = ['rect', 'circle', 'round', 'ur', 'll'],
+        colors = ['', 'r', 'g', 'b', 'rgb', 'rg', 'gb', 'br'],
+        size = 6,
+        html = '',
+        options = {
+            inset  : false,
+            inverse: false
+        },
+        i, j;
 
-    <div class="container">
-        <h1>Real Shadow</h1>
-        by <a href="http://indamix.github.com/">Indamix</a>
-        <p>Module that casts photorealistic shadows. Perfect for eye-catching demos and landing pages.</p>
-        <p>Move the mouse cursor across the page</p>
-        <div class="demo"></div>
-    </div>
+    for (i = 0; i < size; ++i) {
+        html += '<p>';
+        for (j = 0; j < size; ++j)
+            html += '<span rel="' +
+                colors[(i * size + j) % colors.length] +
+                '" class="realshadow block ' +
+                shapes[(i * size + j) % shapes.length] +
+                ' c' +
+                colors[(i * size + j) % colors.length] +
+            '"></span>';
+        html += '</p>';
+    }
 
-    <script type="text/javascript" src="js/realshadow.js"></script>
-    <script type="text/javascript">
-    (function(){
+    for (i in options) {
+        if (location.hash.indexOf(i) !== -1) options[i] = true;
+    }
 
-        var a = ['rect', 'circle', 'round', 'ur', 'll'],
-                c = ['', 'r', 'g', 'b', 'rgb', 'rg', 'gb', 'br'],
-                columns = rows = 6,
-                s = '', i, j;
+    document.getElementsByClassName('demo')[0].innerHTML =
+        '<label><input type="checkbox" id="inset"' + (options.inset ? ' checked' : '') + '/>Inset Shadows</label>' +
+        '<label><input type="checkbox" id="inverse"' + (options.inverse ? ' checked' : '') + '/>Inverse Direction</label>' +
+        '<div class="wrapper">' + html + '</div>' +
+        '<a class="big" href="http://corejs.github.io/">Check my new project, CoreJS<a/>';
 
-        for (i = 0; i < columns; ++i){
-            s += '<p>';
-            for (j = 0; j < rows; ++j)
-                s += '<span rel="' +
-                        c[(i * columns + j) % c.length] +
-                        '" class="realshadow block ' +
-                        a[(i * columns + j) % a.length] +
-                        ' c' +
-                        c[(i * columns + j) % c.length] +
-                        '"></span>';
-            s += '</p>';
+    document.body.addEventListener('change', function (e) {
+        options[e.target.id] = e.target.checked;
+        var s = '';
+        for (var i in options) {
+            if (options[i]) s += ',' + i;
         }
+        location.hash = '/' + s.substr(1);
+        addShadows();
+    });
 
-        document.getElementsByClassName('demo')[0].innerHTML =
-            '<div class="wrapper">' + s + '</div>' +
-            '<div class="inset block big">Inset shadows are supported as well<div/>';
+    addShadows();
 
-        realshadow(document.getElementsByClassName('realshadow'));
-        realshadow(document.getElementsByClassName('inset'), {inset: true});
+    function addShadows() {
+        realshadow.reset();
+        realshadow(document.getElementsByClassName('realshadow'), options);
+        realshadow(document.getElementsByClassName('big'), options);
+    }
 
-    })();
-    </script>
+})();
+</script>
 
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-    <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-    
-  </body>
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+
+</body>
 </html>
