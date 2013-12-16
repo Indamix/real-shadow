@@ -12,11 +12,9 @@
             followMouse: true,
             length: 7
         },
-        params = {
-            nMax: 2.3,
-            pow: .8,
-            div: 1500
-        },
+        nMax = 2.3,
+        power = .8,
+        k = 1 / 1500,
         pi = Math.PI,
         els = [],
         exported = false;
@@ -44,18 +42,18 @@
     }
 
     function init(elements, options) {
-        if (this === window) {
-
-        } else {
+        if (this !== window) {
             options = elements;
             elements = this;
         }
 
-        for (var i in options)
+        for (var i in options) {
             settings[i] = options[i];
+        }
 
-        if (!els.length && settings.followMouse)
+        if (!els.length && settings.followMouse) {
             document.body.addEventListener('mousemove', frame);
+        }
         window.addEventListener('resize', update);
 
         for (i = 0; i < elements.length; ++i) add(elements[i]);
@@ -71,14 +69,15 @@
                 y: el.offsetTop  + (el.clientHeight >> 1)
             };
 
-        if (c)
+        if (c) {
             p.c = {
                 r: c.indexOf('r') !== -1,
                 g: c.indexOf('g') !== -1,
                 b: c.indexOf('b') !== -1
             };
-        else
+        } else {
             if (settings.c) p.c = settings.c;
+        }
 
         p.inset = settings.inset ? 'inset' : '';
 
@@ -100,26 +99,26 @@
     }
 
     function castShadows(el, angle, n, length) {
-        var shadows = [],
+        var shadows = new Array(length - 1),
             cos = Math.cos(angle),
             sin = Math.sin(angle),
             r;
+
         for (var i = 1; i < length; ++i) {
             r = Math.pow(i, n);
-            shadows.push(
-                ( r * sin >> 0 ) + 'px '  +
-                    ( r * cos >> 0 ) + 'px '  +
-                    ( Math.pow(i, 1.7) >> 0 ) +
-                    'px rgba(' +
+            shadows[i - 1] =
+                ( r * sin | 0 ) + 'px '  +
+                ( r * cos | 0 ) + 'px '  +
+                ( Math.pow(i, 1.7) | 0 ) +
+                'px rgba(' +
                     (el.c ?
                         (el.c.r ? 100 : 0) + ',' +
-                            (el.c.g ? 100 : 0) + ',' +
-                            (el.c.b ? 100 : 0) + ','
-                        :
+                        (el.c.g ? 100 : 0) + ',' +
+                        (el.c.b ? 100 : 0) + ','
+                    :
                         '0,0,0,'
-                        ) +
-                    '.05)' + el.inset
-            );
+                    ) +
+                '.05)' + el.inset;
         }
 
         el.dom.style.boxShadow = shadows.join(',');
@@ -137,12 +136,11 @@
         while (i--) {
             el = els[i];
 
-            var x = e.pageX - els[i].x,
-                y = e.pageY - els[i].y,
-                n = Math.pow(x * x + y * y, params.pow);
-            n = n / params.div + 1;
+            var x = e.pageX - el.x,
+                y = e.pageY - el.y,
+                n = Math.pow(x * x + y * y, power) * k + 1;
 
-            if (n > params.nMax) n = params.nMax;
+            if (n > nMax) n = nMax;
 
             castShadows(
                 el,
