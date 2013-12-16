@@ -1,5 +1,5 @@
 /*!
- * Real Shadow v1.2.0
+ * Real Shadow v1.2.1
  * https://github.com/Indamix/real-shadow
  *
  * Copyright 2012, Ivan Indamix
@@ -51,10 +51,12 @@
             settings[i] = options[i];
         }
 
-        if (!els.length && settings.followMouse) {
-            document.body.addEventListener('mousemove', frame);
+        if (!els.length) {
+            if (settings.followMouse) {
+                document.body.addEventListener('mousemove', frame);
+            }
+            window.addEventListener('resize', update);
         }
-        window.addEventListener('resize', update);
 
         for (i = 0; i < elements.length; ++i) add(elements[i]);
         frame();
@@ -80,9 +82,16 @@
         }
 
         p.inset = settings.inset ? 'inset' : '';
+        p.inverse = settings.inverse ? -1 : 1;
 
         els.push(p);
     }
+
+    init.reset = function () {
+        els = [];
+        document.body.removeEventListener('mousemove', frame);
+        window.removeEventListener('resize', update);
+    };
 
     function update() {
         var i = els.length,
@@ -105,7 +114,7 @@
             r;
 
         for (var i = 1; i < length; ++i) {
-            r = Math.pow(i, n);
+            r = Math.pow(i, n) * el.inverse;
             shadows[i - 1] =
                 ( r * sin | 0 ) + 'px '  +
                 ( r * cos | 0 ) + 'px '  +
