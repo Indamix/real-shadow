@@ -20,19 +20,36 @@ a {
 	padding: 10px 0;
 }
 
+label {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 5px;
+    width: 140px;
+    border-radius: 10px;
+    text-align: left;
+    background: #ccc;
+}
+
 .block {
 	margin: 20px 30px;
-	display:inline-block;
-	width:50px;
-	height:50px;
+	display: inline-block;
+	width: 50px;
+	height: 50px;
 }
 
 .big {
+    background: url(https://raw.github.com/CoreJS/CoreJS/master/app/i/core.png) no-repeat center 35px;
+    color: #690;
+    display: inline-block;
 	width: 380px;
-	height: 100px;
-	line-height: 100px;
+	height: 110px;
+	padding: 10px;
 	margin-bottom: 200px;
 	border-radius: 10px;
+}
+
+.big:hover {
+    background-color: #fff;
 }
 
 .c  {background:rgba(193,193,193,.5)}

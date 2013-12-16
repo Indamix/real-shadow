@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="main.css"/>
     <title>Real Shadow: Photorealistic Shadows</title>
 </head>
-
 <body>
 <a id="forkme_banner" href="https://github.com/Indamix/real-shadow">Fork Me on GitHub</a>
 
@@ -24,30 +23,56 @@
 <script type="text/javascript">
     (function () {
 
-        var a = ['rect', 'circle', 'round', 'ur', 'll'],
-                c = ['', 'r', 'g', 'b', 'rgb', 'rg', 'gb', 'br'],
-                columns = rows = 6,
-                s = '', i, j;
+        var shapes = ['rect', 'circle', 'round', 'ur', 'll'],
+            colors = ['', 'r', 'g', 'b', 'rgb', 'rg', 'gb', 'br'],
+            size = 6,
+            html = '',
+            options = {
+                inset: false,
+                inverse: false
+            },
+            i, j;
 
-        for (i = 0; i < columns; ++i) {
-            s += '<p>';
-            for (j = 0; j < rows; ++j)
-                s += '<span rel="' +
-                    c[(i * columns + j) % c.length] +
+        for (i = 0; i < size; ++i) {
+            html += '<p>';
+            for (j = 0; j < size; ++j)
+                html += '<span rel="' +
+                    colors[(i * size + j) % colors.length] +
                     '" class="realshadow block ' +
-                    a[(i * columns + j) % a.length] +
+                    shapes[(i * size + j) % shapes.length] +
                     ' c' +
-                    c[(i * columns + j) % c.length] +
-                    '"></span>';
-            s += '</p>';
+                    colors[(i * size + j) % colors.length] +
+                '"></span>';
+            html += '</p>';
+        }
+
+        for (var i in options) {
+            if (location.hash.indexOf(i) !== -1) options[i] = true;
         }
 
         document.getElementsByClassName('demo')[0].innerHTML =
-            '<div class="wrapper">' + s + '</div>' +
-            '<div class="inset block big">Inset shadows are supported as well<div/>';
+            '<label><input type="checkbox" id="inset"' + (options.inset ? ' checked' : '') + '/>Inset Shadows</label>' +
+            '<label><input type="checkbox" id="inverse"' + (options.inverse ? ' checked' : '') + '/>Inverse Direction</label>' +
+            '<div class="wrapper">' + html + '</div>' +
+            '<a class="big" href="http://corejs.github.io/">Check my new project, CoreJS<a/>';
 
-        realshadow(document.getElementsByClassName('realshadow'));
-        realshadow(document.getElementsByClassName('inset'), {inset: true});
+        document.body.addEventListener('change', function (e) {
+            options[e.target.id] = e.target.checked;
+            var s = '';
+            for (var i in options) {
+                if (options[i]) s += ',' + i;
+            }
+            location.hash = '/' + s.substr(1);
+            addShadows();
+        });
+
+        addShadows();
+
+        function addShadows() {
+            realshadow.reset();
+            realshadow(document.getElementsByClassName('realshadow'), options);
+            realshadow(document.getElementsByClassName('big'), options);
+        }
 
     })();
 </script>
