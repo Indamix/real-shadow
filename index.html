@@ -2,13 +2,11 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=640"/>
     <link rel="stylesheet" href="main.css"/>
-    <title>Real Shadow: Photorealistic Shadows</title>
+    <title>Real Shadow: Photorealistic Shadows of any shape</title>
 </head>
 <body>
-<a id="forkme_banner" href="https://github.com/Indamix/real-shadow">Fork Me on GitHub</a>
 
 <div class="container">
     <h1>Real Shadow</h1>
@@ -16,65 +14,11 @@
 
     <p>Move the mouse cursor across the page</p>
 
-    <div class="demo"></div>
+    <div id="navigation" class="nav"></div>
+    <div id="demo"></div>
 </div>
 
-<script type="text/javascript" src="realshadow.js"></script>
-<script type="text/javascript">
-    (function () {
-
-        var shapes = ['rect', 'circle', 'round', 'ur', 'll'],
-            colors = ['', 'r', 'g', 'b', 'rgb', 'rg', 'gb', 'br'],
-            size = 6,
-            html = '',
-            options = {
-                inset: false,
-                inverse: false
-            },
-            i, j;
-
-        for (i = 0; i < size; ++i) {
-            html += '<p>';
-            for (j = 0; j < size; ++j)
-                html += '<span rel="' +
-                    colors[(i * size + j) % colors.length] +
-                    '" class="realshadow block ' +
-                    shapes[(i * size + j) % shapes.length] +
-                    ' c' +
-                    colors[(i * size + j) % colors.length] +
-                '"></span>';
-            html += '</p>';
-        }
-
-        for (var i in options) {
-            if (location.hash.indexOf(i) !== -1) options[i] = true;
-        }
-
-        document.getElementsByClassName('demo')[0].innerHTML =
-            '<label><input type="checkbox" id="inset"' + (options.inset ? ' checked' : '') + '/>Inset Shadows</label>' +
-            '<label><input type="checkbox" id="inverse"' + (options.inverse ? ' checked' : '') + '/>Inverse Direction</label>' +
-            '<div class="wrapper">' + html + '</div>' +
-            '<a class="big" href="http://corejs.github.io/">Check my new project, CoreJS<a/>';
-
-        document.body.addEventListener('change', function (e) {
-            options[e.target.id] = e.target.checked;
-            var s = '';
-            for (var i in options) {
-                if (options[i]) s += ',' + i;
-            }
-            location.hash = '/' + s.substr(1);
-            addShadows();
-        });
-
-        addShadows();
-
-        function addShadows() {
-            realshadow.reset();
-            realshadow(document.getElementsByClassName('realshadow'), options);
-            realshadow(document.getElementsByClassName('big'), options);
-        }
-
-    })();
-</script>
+<script src="realshadow.js"></script>
+<script src="demo.js"></script>
 </body>
 </html>

@@ -1,13 +1,21 @@
+html, body {
+    height: 100%;
+}
+
 body {
-	background: #fff url(white_brick_wall.png);
 	font: 15px "Helvetica Neue",Calibri,Helvetica,Arial,sans-serif;
-	color: #666;
 	padding: 0; margin: 0;
 }
 
-h1 {
+h1, h2 {
 	margin-bottom: 0;
+}
+h1 {
 	color: #999;
+}
+h2 {
+    font-weight: 100;
+    font-size: 2em;
 }
 
 a {
@@ -20,14 +28,54 @@ a {
 	padding: 10px 0;
 }
 
-label {
+#navigation a {
+    position: relative;
+}
+#navigation a[href="#/drop"]:after {
+    content: 'NEW!';
+    font-size: .8em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 10px;
+    border-radius: 10px;
+    background: #f00;
+    color: #ff0;
+}
+
+.nav {
+    margin-bottom: 20px;
+    z-index: 1;
+    position: relative;
+}
+
+.nav a, .nav label {
     display: inline-block;
-    margin: 0 10px;
     padding: 5px;
     width: 140px;
+    margin: 0 10px;
     border-radius: 10px;
+    cursor: pointer;
+    color: #666;
+    background: rgba(0,0,0,.1);
+}
+.nav a:hover, .nav label:hover {
+    background: rgba(0,0,0,.2);
+}
+.nav a.current {
+    color: #fff;
+    background: rgba(0,0,0,.3);
+}
+
+/* Box */
+
+body.box {
+	background: #fff url(i/white_brick_wall.png);
+	color: #666;
+}
+
+label {
     text-align: left;
-    background: #ccc;
 }
 
 .block {
@@ -65,3 +113,110 @@ label {
 .circle {border-radius:30px}
 .ur {border-radius:5px 50px 5px 5px}
 .ll {border-radius:5px 5px 5px 50px}
+
+/* Drop */
+
+body.drop {
+    background: rgb(153, 204, 255);
+}
+
+body.drop h1 {
+    color: #333;
+}
+
+#exampleA img {
+    padding: 10px;
+}
+
+.logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -246px;
+    margin-left: -246px;
+}
+.tooltip {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background: #fff;
+    position: relative;
+    border-radius: 5px;
+}
+.tooltip:after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    bottom: -10px;
+    border-style: solid;
+    border-color: #fff transparent;
+    border-width: 10px 10px 0 10px;
+}
+.tooltip:before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    right: -100px;
+    bottom: -100px;
+}
+
+#exampleB img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -170px 0 0 -170px;
+}
+.panel {
+    position: absolute;
+    background: #fff;
+}
+.left, .right {
+    top: 0;
+    bottom: 0;
+}
+.left {
+    left: 0;
+    right: 50%;
+    margin-right: 160px;
+}
+.right {
+    right: 0;
+    left: 50%;
+    margin-left: 160px;
+}
+.top {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 50%;
+    margin-bottom: 160px;
+}
+.bottom {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 50%;
+    margin-top: 160px;
+}
+
+#colors {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+#colors div {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 10px 10px 0 0;
+    border-radius: 5px;
+}
+#colors div:hover {
+    cursor: pointer;
+    border: 2px solid #000;
+    margin: -2px 8px -2px -2px;
+}
