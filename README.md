@@ -1,4 +1,4 @@
-# [Real Shadow](http://indamix.github.com/real-shadow/) — Module that casts photorealistic shadows
+# [Real Shadow](http://indamix.github.io/real-shadow/) — Module that casts photorealistic shadows of [any shape](http://indamix.github.io/real-shadow/#/drop/)
 Perfect for eye-catching demos and landing pages.  
 Works in any browser supporting CSS box-shadow property.
 
@@ -7,14 +7,9 @@ Real Shadow registers itself as CommonJS module, AMD module or jQuery plugin (it
 If there is no CommonJS, AMD or jQuery, Real Shadow registers itself in the global namespace.
 
 ## What's new
-+ now Real Shadow works with CommonJS, AMD and jQuery
-+ removed jQuery dependency
-+ possibility to update shadows during/after jQuery animations
-+ possibility to set custom shadow length
-+ inset shadows
-+ optimizations
-+ corrected shadow positions
-+ chaining support
++ shadows can be of [any shape](http://indamix.github.io/real-shadow/#/drop/)
++ per-element settings (instead of global settings)
++ performance improvements
 
 ## Basic Usage with jQuery
 ```javascript
@@ -31,7 +26,9 @@ $(selector).realshadow({
 		r: 1,             // red   channel for shadow
 		g: 1,             // green channel for shadow
 		b: 1,             // blue  channel for shadow
-	}
+	},
+
+	type: 'drop'          // optional, shadow repeats element's transparency
 
 });
 ```
@@ -63,6 +60,20 @@ $('span').realshadow();
 ```javascript
 $(selector).realshadow({
 	inset: true // default: false
+});
+```
+
+## Inverse Shadows
+```javascript
+$(selector).realshadow({
+	inverse: true // default: false
+});
+```
+
+## Custom Shadow Shape
+```javascript
+$(selector).realshadow({
+	type: 'drop'
 });
 ```
 
@@ -102,6 +113,12 @@ require(['realshadow'], function(realshadow) {
 	realshadow(document.getElementsByTagName('li'), options);
 
 });
+```
+
+## Reset Real Shadow
+Real Shadow will release all added elements and remove all its event listeners
+```javascript
+realshadow.reset();
 ```
 
 If you suppose that the usage of Real Shadow is unclear, feel free to contact me.
