@@ -19,7 +19,8 @@
   ],
   "license": "MIT",
   "ignore": [
-    "i/*.*",
+    ".gitignore",
+    "i",
     "node_modules",
     "bower_components",
     "demo.js",
