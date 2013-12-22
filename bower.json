@@ -19,7 +19,7 @@
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
+    "i/*.*",
     "node_modules",
     "bower_components",
     "demo.js",
