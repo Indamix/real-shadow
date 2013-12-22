@@ -121,4 +121,13 @@ Real Shadow will release all added elements and remove all its event listeners
 realshadow.reset();
 ```
 
+
+## Getting Real Shadow
+Real Shadow is available in [GitHub](https://github.com/Indamix/real-shadow)
+And you can get it using Bower:
+```bash
+bower install real-shadow
+```
+
+---
 If you suppose that the usage of Real Shadow is unclear, feel free to contact me.
