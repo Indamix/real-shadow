@@ -31,7 +31,8 @@ a {
 #navigation a {
     position: relative;
 }
-#navigation a[href="#/drop"]:after {
+#navigation a[href="#/drop"]:after,
+#navigation a[href="#/text"]:after {
     content: 'NEW!';
     font-size: .8em;
     position: absolute;
@@ -252,4 +253,38 @@ body.drop h1 {
     cursor: pointer;
     border: 2px solid #000;
     margin: -2px 8px -2px -2px;
+}
+
+/* Text */
+
+body.text {
+    background: #fcfff4; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, #fcfff4 0%, #e9e9ce 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#fcfff4), color-stop(100%,#e9e9ce)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, #fcfff4 0%,#e9e9ce 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, #fcfff4 0%,#e9e9ce 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, #fcfff4 0%,#e9e9ce 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center, #fcfff4 0%,#e9e9ce 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#e9e9ce',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.text h3,
+.text h4 {
+    display: inline;
+    font-size: 5em;
+}
+
+.text h4 {
+    letter-spacing: .5em;
+    color: #fcfff4;
+}
+
+.text span {
+    display: inline-block;
+}
+
+.fold {
+    width: 50%;
+    margin: 50px auto;
+    text-align: left;
 }

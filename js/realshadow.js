@@ -1,5 +1,5 @@
 /*!
- * Real Shadow v1.3.0
+ * Real Shadow v1.3.1
  * http://indamix.github.io/real-shadow
  *
  * (c) 2012-2013 Ivan Indamix
@@ -59,8 +59,8 @@
         el.inverse = settings.inverse ? -1 : 1;
         if (settings.pageX !== undefined) el.pageX = settings.pageX;
         if (settings.pageY !== undefined) el.pageY = settings.pageY;
+        el.type = settings.type;
         if (settings.type === 'drop') {
-            el.type = settings.type;
             if (isFilterSupported === undefined) {
                 isFilterSupported = hasFilterSupport('webkit');
             }
@@ -129,23 +129,23 @@
             r = Math.pow(i, n) * el.inverse;
             shadows[i - 1] =
                 ( r * sin | 0 ) + 'px '  +
-                    ( r * cos | 0 ) + 'px '  +
-                    ( Math.pow(i, 1.7) | 0 ) +
-                    'px rgba(' +
-                    (el.c ?
-                        (el.c.r ? 100 : 0) + ',' +
-                            (el.c.g ? 100 : 0) + ',' +
-                            (el.c.b ? 100 : 0) + ','
-                        :
-                        '0,0,0,'
-                        ) +
-                    el.opacity + ')' + el.inset;
+                ( r * cos | 0 ) + 'px '  +
+                ( Math.pow(i, 1.7) | 0 ) +
+                'px rgba(' +
+                (el.c ?
+                    (el.c.r ? 100 : 0) + ',' +
+                    (el.c.g ? 100 : 0) + ',' +
+                    (el.c.b ? 100 : 0) + ','
+                :
+                    '0,0,0,'
+                ) +
+                el.opacity + ')' + el.inset;
         }
 
         if (el.type === 'drop') {
             el.node.style.webkitFilter = 'drop-shadow(' + shadows.join(') drop-shadow(') + ')';
         } else {
-            el.node.style.boxShadow = shadows.join(',');
+            el.node.style[el.type === 'text' ? 'textShadow' : 'boxShadow'] = shadows.join(',');
         }
     }
 
@@ -172,18 +172,18 @@
 
     function svgTpl(id) {
         return '' +
-            '<svg height="0" xmlns="http://www.w3.org/2000/svg">' +
+        '<svg height="0" xmlns="http://www.w3.org/2000/svg">' +
             '<filter id="' + id + '">' +
-            '<feGaussianBlur in="SourceAlpha"/>' +
-            '<feOffset result="b"/>' +
-            '<feFlood/>' +
-            '<feComposite in2="b" operator="in"/>' +
-            '<feMerge>' +
-            '<feMergeNode/>' +
-            '<feMergeNode in="SourceGraphic"/>' +
-            '</feMerge>' +
+                '<feGaussianBlur in="SourceAlpha"/>' +
+                '<feOffset result="b"/>' +
+                '<feFlood/>' +
+                '<feComposite in2="b" operator="in"/>' +
+                '<feMerge>' +
+                    '<feMergeNode/>' +
+                    '<feMergeNode in="SourceGraphic"/>' +
+                '</feMerge>' +
             '</filter>' +
-            '</svg>';
+        '</svg>';
     }
 
     function dist(t) {
