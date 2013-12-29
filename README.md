@@ -7,6 +7,7 @@ Real Shadow registers itself as CommonJS module, AMD module or jQuery plugin (it
 If there is no CommonJS, AMD or jQuery, Real Shadow registers itself in the global namespace.
 
 ## What's new
++ [text shadows](http://indamix.github.io/real-shadow/#/text/)
 + shadows can be of [any shape](http://indamix.github.io/real-shadow/#/drop/)
 + per-element settings (instead of global settings)
 + performance improvements
@@ -28,7 +29,7 @@ $(selector).realshadow({
 		b: 1,             // blue  channel for shadow
 	},
 
-	type: 'drop'          // optional, shadow repeats element's transparency
+	type: 'drop' / 'text' // optional, shadow type
 
 });
 ```
@@ -74,6 +75,13 @@ $(selector).realshadow({
 ```javascript
 $(selector).realshadow({
 	type: 'drop'
+});
+```
+
+## Text Shadow
+```javascript
+$(selector).realshadow({
+	type: 'text'
 });
 ```
 
