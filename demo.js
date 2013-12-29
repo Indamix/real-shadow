@@ -116,6 +116,29 @@
 
     };
 
+    var text = function () {
+
+        realshadow.reset();
+
+        var text = 'The outside world is a projection, you put it there. It is not happening out there, it is happening inside your head. It is, in fact, a dream, exactly like when you fall asleep. We need to see, we need to perceive, we need to dream actively, because this is the only way we can take this huge universe and put it inside a very tiny head. We fold it, make an image, and then project it out.';
+
+        $container.innerHTML =
+            tags('h3', 'Text Shadows') +
+            '<br/>' +
+            '<div class="fold">' +
+                '<span>' + text + '</span>' +
+            '</div>' +
+            tags('h4', 'WE FOLD IT');
+
+        realshadow(document.getElementsByTagName('h3'), {type: 'text'});
+        realshadow(document.getElementsByTagName('span'), {type: 'text', opacity: .2, length: 3});
+        realshadow(document.getElementsByTagName('h4'), {type: 'text', c: {r: 1, g: 1}});
+
+        function tags(tag, text) {
+            return '<' + tag + '>' + text.split('').join('</' + tag + '><' + tag + '>') + '</' + tag + '>';
+        }
+    };
+
 
     var $container = document.getElementById('demo');
 
@@ -124,6 +147,7 @@
         var routes = {
                 box    : box,
                 drop   : drop,
+                text   : text,
                 default: 'box'
             },
             $navigation = document.getElementById('navigation'),
@@ -134,7 +158,6 @@
             html += '<a href="#/' + i + '">' + i + '</a>';
         }
         $navigation.innerHTML = html;
-
 
         window.addEventListener('hashchange', check);
         check();
