@@ -1,5 +1,5 @@
 /*!
- * Real Shadow v1.3.1
+ * Real Shadow v1.3.2
  * http://indamix.github.io/real-shadow
  *
  * (c) 2012-2013 Ivan Indamix
@@ -37,26 +37,16 @@
     }
 
     function add(el, settings) {
-        var c = el.getAttribute('rel'),
-            center = getCenter(el);
+        var center = getCenter(el);
         el = {
-            node: el,
-            x: center.x,
-            y: center.y
+            node   : el,
+            x      : center.x,
+            y      : center.y,
+            c      : el.getAttribute('data-shadow-color') || settings.color,
+            inset  : settings.inset ? 'inset' : '',
+            inverse: settings.inverse ? -1 : 1
         };
 
-        if (c) {
-            el.c = {
-                r: c.indexOf('r') !== -1,
-                g: c.indexOf('g') !== -1,
-                b: c.indexOf('b') !== -1
-            };
-        } else {
-            if (settings.c) el.c = settings.c;
-        }
-
-        el.inset = settings.inset ? 'inset' : '';
-        el.inverse = settings.inverse ? -1 : 1;
         if (settings.pageX !== undefined) el.pageX = settings.pageX;
         if (settings.pageY !== undefined) el.pageY = settings.pageY;
         el.type = settings.type;
@@ -131,15 +121,8 @@
                 ( r * sin | 0 ) + 'px '  +
                 ( r * cos | 0 ) + 'px '  +
                 ( Math.pow(i, 1.7) | 0 ) +
-                'px rgba(' +
-                (el.c ?
-                    (el.c.r ? 100 : 0) + ',' +
-                    (el.c.g ? 100 : 0) + ',' +
-                    (el.c.b ? 100 : 0) + ','
-                :
-                    '0,0,0,'
-                ) +
-                el.opacity + ')' + el.inset;
+                'px rgba(' + (el.c || '0,0,0') + ',' + el.opacity + ')' +
+                el.inset;
         }
 
         if (el.type === 'drop') {

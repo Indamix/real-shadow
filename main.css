@@ -101,15 +101,6 @@ label {
     background-color: #fff;
 }
 
-.c  {background:rgba(193,193,193,.5)}
-.cr {background:rgba(255,0,0,.5)}
-.cg {background:rgba(0,200,0,.5)}
-.cb {background:rgba(0,0,255,.5)}
-.crg{background:rgba(255,255,0,.5)}
-.cgb{background:rgba(0,200,255,.5)}
-.cbr{background:rgba(255,0,255,.5)}
-.crgb{background:rgba(255,255,255,.5)}
-
 .round  {border-radius:10px}
 .circle {border-radius:30px}
 .ur {border-radius:5px 50px 5px 5px}
