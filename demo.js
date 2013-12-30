@@ -9,7 +9,8 @@
         realshadow.reset();
 
         var shapes = ['rect', 'circle', 'round', 'ur', 'll'],
-            colors = ['', 'r', 'g', 'b', 'rgb', 'rg', 'gb', 'br'],
+            colors = ['0,0,70', '100,0,0', '0,100,0', '0,0,100', '100,100,100', '100,100,0', '0,100,100', '100,0,100'],
+            colorRe = /100/g,
             size = 6,
             html = '',
             options = {
@@ -21,13 +22,13 @@
         for (i = 0; i < size; ++i) {
             html += '<p>';
             for (j = 0; j < size; ++j)
-                html += '<span rel="' +
+                html += '<span data-shadow-color="' +
                     colors[(i * size + j) % colors.length] +
                     '" class="realshadow block ' +
                     shapes[(i * size + j) % shapes.length] +
-                    ' c' +
-                    colors[(i * size + j) % colors.length] +
-                '"></span>';
+                    '" style="background:rgba(' +
+                    colors[(i * size + j) % colors.length].replace(colorRe, '255') +
+                ',.5)"></span>';
             html += '</p>';
         }
 
@@ -132,7 +133,7 @@
 
         realshadow(document.getElementsByTagName('h3'), {type: 'text'});
         realshadow(document.getElementsByTagName('span'), {type: 'text', opacity: .2, length: 3});
-        realshadow(document.getElementsByTagName('h4'), {type: 'text', c: {r: 1, g: 1}});
+        realshadow(document.getElementsByTagName('h4'), {type: 'text', color: '100,100,0'});
 
         function tags(tag, text) {
             return '<' + tag + '>' + text.split('').join('</' + tag + '><' + tag + '>') + '</' + tag + '>';

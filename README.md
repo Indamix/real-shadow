@@ -20,16 +20,12 @@ $(selector).realshadow({
 
 	followMouse: false,   // default: true
 
-	pageX:       x,       // x coordinate of the light source
-	pageY:       y        // y coordinate of the light source
+	pageX: x,             // x coordinate of the light source
+	pageY: y              // y coordinate of the light source
 
-	c: {                  // shadow color
-		r: 1,             // red   channel for shadow
-		g: 1,             // green channel for shadow
-		b: 1,             // blue  channel for shadow
-	},
+	color: '0,127,255'    // shadow color, rgb 0..255, default: '0,0,0'
 
-	type: 'drop' / 'text' // optional, shadow type
+	type: 'drop' / 'text' // shadow type
 
 });
 ```
@@ -41,16 +37,18 @@ realshadow(elements); // options are optional
 realshadow(elements, options); // options example listed above
 ```
 
-To specify different colors for each element, you can use "rel" attribute:
+To specify different colors for each element, you can use "data-shadow-color" attribute:
 
 ```html
-<span rel="r"></span>
-<span rel="g"></span>
-<span rel="b"></span>
-<span rel="rg"></span>
-<span rel="gb"></span>
-<span rel="br"></span>
-<span rel="rgb"></span>
+<span data-shadow-color="r,g,b"></span> <!-- values in range 0..255 -->
+
+<span data-shadow-color="255,0,0">red</span>
+<span data-shadow-color="0,255,0">green</span>
+<span data-shadow-color="0,0,255">blue</span>
+<span data-shadow-color="255,255,0">yellow</span>
+<span data-shadow-color="0,255,255">cyan</span>
+<span data-shadow-color="255,0,255">violet</span>
+<span data-shadow-color="100,100,100">grey</span>
 ```
 
 ```javascript
