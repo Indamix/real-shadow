@@ -1,5 +1,5 @@
 /*!
- * Real Shadow v1.3.2
+ * Real Shadow v1.3.3
  * http://indamix.github.io/real-shadow
  *
  * (c) 2012-2013 Ivan Indamix
@@ -26,12 +26,12 @@
 
         if (!hasMoveListener) {
             if (options.followMouse !== false) {
-                document.body.addEventListener('mousemove', frame);
+                document.body.addEventListener('mousemove', init.frame);
                 hasMoveListener = true;
             }
             window.addEventListener('resize', init.update);
         }
-        frame();
+        init.frame();
 
         return elements;
     }
@@ -60,13 +60,18 @@
             el.length  = settings.length  || 7;
             el.opacity = settings.opacity || .05;
         }
+        if (settings.style === 'flat') {
+            el.style   = settings.style;
+            el.length  = settings.length  || 40;
+            el.opacity = settings.opacity || 1;
+        }
 
         els.push(el);
     }
 
     init.reset = function () {
         els = [];
-        document.body.removeEventListener('mousemove', frame);
+        document.body.removeEventListener('mousemove', init.frame);
         window.removeEventListener('resize', init.update);
         hasMoveListener = false;
     };
@@ -81,10 +86,10 @@
             el.y = center.y;
         }
 
-        frame();
+        init.frame();
     };
 
-    function frame(e) {
+    init.frame = function (e) {
         if (!e) e = {
             pageX: window.innerWidth >> 1,
             pageY: 0
@@ -107,7 +112,7 @@
                 render(el, Math.atan2(x, y) - pi, n);
             }
         }
-    }
+    };
 
     function render(el, angle, n) {
         var shadows = new Array(el.length - 1),
@@ -116,11 +121,11 @@
             r;
 
         for (var i = 1; i < el.length; ++i) {
-            r = Math.pow(i, n) * el.inverse;
+            r = ( el.style === 'flat' ? i : Math.pow(i, n) ) * el.inverse;
             shadows[i - 1] =
                 ( r * sin | 0 ) + 'px '  +
                 ( r * cos | 0 ) + 'px '  +
-                ( Math.pow(i, 1.7) | 0 ) +
+                ( el.style === 'flat' ? 0 : Math.pow(i, 1.7) | 0 ) +
                 'px rgba(' + (el.c || '0,0,0') + ',' + el.opacity + ')' +
                 el.inset;
         }
