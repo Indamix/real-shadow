@@ -2,11 +2,37 @@
  * This 'app' has been quickly built only to demonstrate the features of Real Shadow
  * To explore the well-structured apps, check out CoreJS http://corejs.github.io/
  */
+
+// rAF polyfill
+(function (w) {
+    var lastTime = 0,
+        vendors = ['webkit', 'moz'];
+    for (var x = 0; x < vendors.length && !w.requestAnimationFrame; ++x) {
+        w.requestAnimationFrame = w[vendors[x] + 'RequestAnimationFrame'];
+        w.cancelAnimationFrame = w[vendors[x] + 'CancelAnimationFrame'] || w[vendors[x] + 'CancelRequestAnimationFrame'];
+    }
+
+    if (!w.requestAnimationFrame)
+        w.requestAnimationFrame = function (callback) {
+            var currTime = new Date().getTime(),
+                timeToCall = Math.max(0, 16 - (currTime - lastTime)),
+                id = w.setTimeout(function () {
+                    callback(currTime + timeToCall);
+                },
+                timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+
+    if (!w.cancelAnimationFrame)
+        w.cancelAnimationFrame = function (id) {
+            clearTimeout(id);
+        };
+}(window));
+
 (function () {
 
     var box = function () {
-
-        realshadow.reset();
 
         var shapes = ['rect', 'circle', 'round', 'ur', 'll'],
             colors = ['0,0,70', '100,0,0', '0,100,0', '0,0,100', '100,100,100', '100,100,0', '0,100,100', '100,0,100'],
@@ -67,8 +93,6 @@
 
     var drop = function(tab) {
 
-        realshadow.reset();
-
         tab = tab || 'A';
 
         $container.innerHTML =
@@ -119,8 +143,6 @@
 
     var text = function () {
 
-        realshadow.reset();
-
         var text = 'The outside world is a projection, you put it there. It is not happening out there, it is happening inside your head. It is, in fact, a dream, exactly like when you fall asleep. We need to see, we need to perceive, we need to dream actively, because this is the only way we can take this huge universe and put it inside a very tiny head. We fold it, make an image, and then project it out.';
 
         $container.innerHTML =
@@ -132,13 +154,57 @@
             tags('h4', 'WE FOLD IT');
 
         realshadow(document.getElementsByTagName('h3'), {type: 'text'});
-        realshadow(document.getElementsByTagName('span'), {type: 'text', opacity: .2, length: 3});
+        var $fold = document.getElementsByClassName('fold')[0];
+        realshadow($fold.getElementsByTagName('span'), {type: 'text', opacity: .2, length: 3});
         realshadow(document.getElementsByTagName('h4'), {type: 'text', color: '100,100,0'});
 
-        function tags(tag, text) {
-            return '<' + tag + '>' + text.split('').join('</' + tag + '><' + tag + '>') + '</' + tag + '>';
-        }
     };
+
+    var flat = function () {
+
+        var s = 'FLAT SHADOWS';
+        $container.innerHTML =
+            '<div id="flat">' +
+                [tags('span', s), tags('i', s), tags('b', s), tags('u', s)].join('<br/>') +
+            '</div>';
+
+        var $flat = document.getElementById('flat');
+        realshadow($flat.getElementsByTagName('span'), {type: 'text', style: 'flat', length: 40, color: '255,160,0'});
+        realshadow($flat.getElementsByTagName('i'), {type: 'text', style: 'flat', length: 40, color: '100,100,255'});
+        realshadow($flat.getElementsByTagName('b'), {type: 'text', style: 'flat', length: 40, color: '100,200,0'});
+        realshadow($flat.getElementsByTagName('u'), {type: 'text', style: 'flat', length: 40, color: '255,100,100'});
+
+    };
+
+    var moveLight = (function () {
+        var rx, ry, hasMouseMoved;
+
+        return function () {
+            rx = window.innerWidth  >> 1;
+            ry = window.innerHeight >> 1;
+            hasMouseMoved = false;
+            document.body.addEventListener('mousemove', stop);
+            frame();
+        };
+
+        function frame() {
+            var a = new Date / 300;
+            realshadow.frame({
+                pageX: rx + rx * Math.cos(a) | 0,
+                pageY: ry + ry * Math.sin(a) | 0
+            });
+            !hasMouseMoved && setTimeout(frame, 16);
+        }
+
+        function stop() {
+            document.body.removeEventListener('mousemove', stop);
+            hasMouseMoved = true;
+        }
+    })();
+
+    function tags(tag, text) {
+        return '<' + tag + '>' + text.split('').join('</' + tag + '><' + tag + '>') + '</' + tag + '>';
+    }
 
 
     var $container = document.getElementById('demo');
@@ -149,6 +215,7 @@
                 box    : box,
                 drop   : drop,
                 text   : text,
+                flat   : flat,
                 default: 'box'
             },
             $navigation = document.getElementById('navigation'),
@@ -181,7 +248,10 @@
             for (var i = items.length; i--;) {
                 items[i].className = items[i].href.replace(/^.*#\//, '') === route ? 'current' : '';
             }
+
+            realshadow.reset();
             routes[route](options);
+            moveLight();
         }
 
     })();
