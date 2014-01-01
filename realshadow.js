@@ -2,7 +2,7 @@
  * Real Shadow v1.3.3
  * http://indamix.github.io/real-shadow
  *
- * (c) 2012-2013 Ivan Indamix
+ * (c) 2012-2014 Ivan Indamix
  * Licensed under the MIT license
  * https://raw.github.com/Indamix/real-shadow/master/license.txt
  */
