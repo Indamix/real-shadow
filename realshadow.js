@@ -49,6 +49,7 @@
 
         if (settings.pageX !== undefined) el.pageX = settings.pageX;
         if (settings.pageY !== undefined) el.pageY = settings.pageY;
+        if (settings.skip !== undefined) el.skip = settings.skip;
         el.type = settings.type;
         if (settings.type === 'drop') {
             if (isFilterSupported === undefined) {
@@ -100,16 +101,18 @@
         while (i--) {
             el = els[i];
 
-            var x = (el.pageX === undefined ? e.pageX : el.pageX) - el.x,
-                y = (el.pageY === undefined ? e.pageY : el.pageY) - el.y,
-                n = Math.pow(x * x + y * y, power) * k + 1;
+            if (el.skip === undefined || Math.floor(Math.random() * el.skip) === 0) {
+                var x = (el.pageX === undefined ? e.pageX : el.pageX) - el.x,
+                    y = (el.pageY === undefined ? e.pageY : el.pageY) - el.y,
+                    n = Math.pow(x * x + y * y, power) * k + 1;
 
-            if (n > nMax) n = nMax;
+                if (n > nMax) n = nMax;
 
-            if (el.type === 'drop' && !isFilterSupported) {
-                renderSVG(el, x, y, n);
-            } else {
-                render(el, Math.atan2(x, y) - pi, n);
+                if (el.type === 'drop' && !isFilterSupported) {
+                    renderSVG(el, x, y, n);
+                } else {
+                    render(el, Math.atan2(x, y) - pi, n);
+                }
             }
         }
     };
