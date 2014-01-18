@@ -1,5 +1,5 @@
 /*!
- * Real Shadow v1.3.3
+ * Real Shadow v1.3.4
  * http://indamix.github.io/real-shadow
  *
  * (c) 2012-2014 Ivan Indamix
@@ -25,7 +25,7 @@
         for (var i = 0; i < elements.length; ++i) add(elements[i], options);
 
         if (!hasMoveListener) {
-            if (options.followMouse !== false) {
+            if (options.followMouse !== false && options.angle === undefined) {
                 document.body.addEventListener('mousemove', init.frame);
                 hasMoveListener = true;
             }
@@ -47,8 +47,12 @@
             inverse: settings.inverse ? -1 : 1
         };
 
-        if (settings.pageX !== undefined) el.pageX = settings.pageX;
-        if (settings.pageY !== undefined) el.pageY = settings.pageY;
+        if (settings.angle !== undefined) {
+            el.angle = settings.angle;
+        } else {
+            if (settings.pageX !== undefined) el.pageX = settings.pageX;
+            if (settings.pageY !== undefined) el.pageY = settings.pageY;
+        }
         el.type = settings.type;
         if (settings.type === 'drop') {
             if (isFilterSupported === undefined) {
@@ -109,7 +113,7 @@
             if (el.type === 'drop' && !isFilterSupported) {
                 renderSVG(el, x, y, n);
             } else {
-                render(el, Math.atan2(x, y) - pi, n);
+                render(el, el.angle === undefined ? Math.atan2(x, y) - pi : el.angle, n);
             }
         }
     };
