@@ -7,10 +7,11 @@ Real Shadow registers itself as CommonJS module, AMD module or jQuery plugin (it
 If there is no CommonJS, AMD or jQuery, Real Shadow registers itself in the global namespace.
 
 ## What's new
++ constant angle
++ [flat shadows](http://indamix.github.io/real-shadow/#/flat/)
 + [text shadows](http://indamix.github.io/real-shadow/#/text/)
 + shadows can be of [any shape](http://indamix.github.io/real-shadow/#/drop/)
 + per-element settings (instead of global settings)
-+ performance improvements
 
 ## Basic Usage with jQuery
 ```javascript
@@ -83,6 +84,15 @@ $(selector).realshadow({
 });
 ```
 
+## Constant Angle
+If you would like the shadows angle to be constant, specify the 'angle' option, in radians.
+
+```javascript
+$(selector).realshadow({
+    angle: Math.PI / 4
+});
+```
+
 ## Update shadows during/after jQuery animations
 ```javascript
 // before: apply Real Shadow to elements:
@@ -136,4 +146,4 @@ bower install real-shadow
 ```
 
 ---
-If you suppose that the usage of Real Shadow is unclear, feel free to contact me.
+If you suppose that the usage of Real Shadow is unclear or have something to say, feel free to [contact me](http://indamix.github.io).
