@@ -7,6 +7,7 @@
  * https://raw.github.com/Indamix/real-shadow/master/license.txt
  */
 (function(window, undefined) {
+  'use strict';
 
   var nMax = 2.3,
       power = .8,
@@ -16,7 +17,7 @@
       hasMoveListener, isFilterSupported;
 
   function init(elements, options) {
-    if (this !== window) {
+    if (this !== window && this !== undefined) {
       options = elements;
       elements = this;
     }
