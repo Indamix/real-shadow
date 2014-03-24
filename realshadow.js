@@ -226,4 +226,4 @@
     window.realshadow = init;
   }
 
-})(this);
+})(window);
