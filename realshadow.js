@@ -210,7 +210,7 @@
     exported = true;
   }
 
-  if (typeof define !== 'undefined' && define.amd) {
+  if (typeof define === 'function' && define.amd) {
     define(function () {
       return init;
     });
