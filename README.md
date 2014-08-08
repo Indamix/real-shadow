@@ -134,7 +134,11 @@ require(['realshadow'], function(realshadow) {
 ## Reset Real Shadow
 Real Shadow will release all added elements and remove all its event listeners
 ```javascript
+// if you have Real Shadow in the current scope:
 realshadow.reset();
+
+// if you use jQuery:
+$.fn.realshadow.reset();
 ```
 
 
