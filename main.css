@@ -323,3 +323,7 @@ body.flat {
     color: #c00;
     background: #f99;
 }
+#twitter-widget-0 {
+    position: relative;
+    z-index: 10;
+}
