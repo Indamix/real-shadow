@@ -18,15 +18,16 @@ If there is no CommonJS, AMD or jQuery, Real Shadow registers itself in the glob
 $(selector).realshadow(); // options are optional
 
 $(selector).realshadow({
-
-	followMouse: false,   // default: true
-
-	pageX: x,             // x coordinate of the light source
-	pageY: y              // y coordinate of the light source
-
-	color: '0,127,255'    // shadow color, rgb 0..255, default: '0,0,0'
-
-	type: 'drop' / 'text' // shadow type
+	angle:Math.PI / 4, 		// angle of shadow, in radians. (default: undefined)
+	color: '0,127,255'    	// shadow color, rgb 0..255, (default: '0,0,0')
+	followMouse: false,   	// follows mouse movement (default: true)
+	inset:true, 			// inset shadow (default: false)
+	length: 100, 			// length of shadow (default: varies on type / style)
+	opacity: .5, 			// opacity of shadow (default: varies on type / style)
+	pageX: x,             	// x coordinate of the light source (ignored if angle is set.)
+	pageY: y              	// y coordinate of the light source (ignored if angle is set.)
+	style:'flat', 			// allows for flat shadow (default: undefined)
+	type: 'drop' 			// shadow type 'drop|text' (default: ?)
 
 });
 ```
