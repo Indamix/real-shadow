@@ -1,5 +1,5 @@
 /*!
- * Real Shadow v1.3.4
+ * Real Shadow v1.4.0
  * http://indamix.github.io/real-shadow
  *
  * (c) 2012-2014 Ivan Indamix
@@ -14,7 +14,7 @@
       k = 1 / 1500,
       pi = Math.PI,
       els = [],
-      hasMoveListener, isFilterSupported;
+      hasMoveListener;
 
   function init(elements, options) {
     if (this !== window && this !== undefined) {
@@ -56,9 +56,6 @@
     }
     el.type = settings.type;
     if (settings.type === 'drop') {
-      if (isFilterSupported === undefined) {
-        isFilterSupported = hasFilterSupport('webkit');
-      }
       el.length  = settings.length  || 4;
       el.opacity = settings.opacity || .2;
     } else {
@@ -111,11 +108,7 @@
 
       if (n > nMax) n = nMax;
 
-      if (el.type === 'drop' && !isFilterSupported) {
-        renderSVG(el, x, y, n);
-      } else {
-        render(el, el.angle === undefined ? Math.atan2(x, y) - pi : el.angle, n);
-      }
+      render(el, el.angle === undefined ? Math.atan2(x, y) - pi : el.angle, n);
     }
   };
 
@@ -136,60 +129,11 @@
     }
 
     if (el.type === 'drop') {
+      el.node.style.filter =
       el.node.style.webkitFilter = 'drop-shadow(' + shadows.join(') drop-shadow(') + ')';
     } else {
       el.node.style[el.type === 'text' ? 'textShadow' : 'boxShadow'] = shadows.join(',');
     }
-  }
-
-  function renderSVG(el, x, y, n) {
-    if (!el.filter) {
-      var id = 'real-shadow-' + Math.random().toString(36).substr(2),
-          d = new DOMParser().parseFromString(svgTpl(id), 'application/xml');
-
-      el.filter = {
-        offset: d.getElementsByTagName('feOffset')[0],
-        blur  : d.getElementsByTagName('feGaussianBlur')[0],
-        color : d.getElementsByTagName('feFlood')[0]
-      };
-
-      document.body.appendChild(d.children[0]);
-      el.node.style.filter = 'url(#' + id + ')';
-    }
-
-    el.filter.offset.setAttribute('dx', dist(x));
-    el.filter.offset.setAttribute('dy', dist(y));
-    el.filter.blur.setAttribute('stdDeviation', n * 2);
-    el.filter.color.setAttribute('flood-color', 'rgba(0,0,0,' + (.6 - n / 8) + ')');
-  }
-
-  function svgTpl(id) {
-    return (
-    '<svg height="0" xmlns="http://www.w3.org/2000/svg">' +
-      '<filter id="' + id + '">' +
-        '<feGaussianBlur in="SourceAlpha"/>' +
-        '<feOffset result="b"/>' +
-        '<feFlood/>' +
-        '<feComposite in2="b" operator="in"/>' +
-        '<feMerge>' +
-          '<feMergeNode/>' +
-          '<feMergeNode in="SourceGraphic"/>' +
-        '</feMerge>' +
-      '</filter>' +
-    '</svg>'
-    );
-  }
-
-  function dist(t) {
-    var sign = t === 0 ? 0 : t < 0 ? 1 : -1;
-    return sign * Math.pow(Math.abs(t), 1 / 3);
-  }
-
-  function hasFilterSupport(prefix) {
-    prefix = prefix ? '-' + prefix + '-' : '';
-    var el = document.createElement('div');
-    el.style.cssText = prefix + 'filter:drop-shadow(0 0 0 #000)';
-    return el.style.length > 0;
   }
 
   function getCenter(el) {
@@ -202,6 +146,9 @@
     return {x: x, y: y};
   }
 
+  /*
+   * Exporting
+   */
 
   var exported = false;
 
