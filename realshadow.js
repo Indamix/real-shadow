@@ -1,13 +1,30 @@
 /*!
- * Real Shadow v1.4.0
+ * Real Shadow v1.4.1
  * http://indamix.github.io/real-shadow
  *
- * (c) 2012-2014 Ivan Indamix
+ * (c) 2012-2015 Ivan Indamix
  * Licensed under the MIT license
  * https://raw.github.com/Indamix/real-shadow/master/license.txt
  */
 (function(window, undefined) {
   'use strict';
+
+  var SHAPES = {
+    DEFAULT: {
+      length: 7,
+      opacity: .05
+    },
+
+    DROP: {
+      length: 4,
+      opacity: .2
+    },
+
+    FLAT: {
+      length: 40,
+      opacity: 1
+    }
+  };
 
   var nMax = 2.3,
       power = .8,
@@ -16,94 +33,86 @@
       els = [],
       hasMoveListener;
 
-  function init(elements, options) {
+  function api(nodes, options) {
     if (this !== window && this !== undefined) {
-      options = elements;
-      elements = this;
+      options = nodes;
+      nodes = this;
     }
 
-    options = options || {};
-    for (var i = 0; i < elements.length; ++i) add(elements[i], options);
+    var config = getConfig(options);
+
+    for (var i = 0; i < nodes.length; ++i) {
+      els.push(createElement(nodes[i], config));
+    }
 
     if (!hasMoveListener) {
-      if (options.followMouse !== false && options.angle === undefined) {
-        document.body.addEventListener('mousemove', init.frame);
+      if (config.followMouse !== false && config.angle === undefined) {
+        document.body.addEventListener('mousemove', api.frame);
         hasMoveListener = true;
       }
-      window.addEventListener('resize', init.update);
+      window.addEventListener('resize', api.update);
     }
-    init.frame();
 
-    return elements;
+    api.frame();
+
+    return nodes;
   }
 
-  function add(el, settings) {
-    var center = getCenter(el);
-    el = {
-      node   : el,
-      x      : center.x,
-      y      : center.y,
-      c      : el.getAttribute('data-shadow-color') || settings.color,
-      inset  : settings.inset ? 'inset' : '',
-      inverse: settings.inverse ? -1 : 1
+  function getConfig(options) {
+    options = options || {};
+
+    var shape =
+        options.style === 'flat' ? SHAPES.FLAT :
+        options.type  === 'drop' ? SHAPES.DROP : SHAPES.DEFAULT;
+
+    var normalization = {
+      inset  : options.inset ? 'inset' : '',
+      inverse: options.inverse ? -1 : 1
     };
 
-    if (settings.angle !== undefined) {
-      el.angle = settings.angle;
-    } else {
-      if (settings.pageX !== undefined) el.pageX = settings.pageX;
-      if (settings.pageY !== undefined) el.pageY = settings.pageY;
-    }
-    el.type = settings.type;
-    if (settings.type === 'drop') {
-      el.length  = settings.length  || 4;
-      el.opacity = settings.opacity || .2;
-    } else {
-      el.length  = settings.length  || 7;
-      el.opacity = settings.opacity || .05;
-    }
-    if (settings.style === 'flat') {
-      el.style   = settings.style;
-      el.length  = settings.length  || 40;
-      el.opacity = settings.opacity || 1;
-    }
-
-    els.push(el);
+    return assign({}, options, shape, normalization);
   }
 
-  init.reset = function () {
+  function createElement(node, options) {
+    return assign({
+      node: node,
+      color: node.getAttribute('data-shadow-color') || '0,0,0'
+    }, getCenter(node), options);
+  }
+
+  api.reset = function () {
     els = [];
-    document.body.removeEventListener('mousemove', init.frame);
-    window.removeEventListener('resize', init.update);
+    document.body.removeEventListener('mousemove', api.frame);
+    window.removeEventListener('resize', api.update);
     hasMoveListener = false;
   };
 
-  init.update = function () {
+  api.update = function () {
     var i = els.length,
         el;
     while (i--) {
       el = els[i];
-      var center = getCenter(el.node);
-      el.x = center.x;
-      el.y = center.y;
+      assign(el, getCenter(el.node));
     }
 
-    init.frame();
+    api.frame();
   };
 
-  init.frame = function (e) {
-    if (!e) e = {
-      pageX: window.innerWidth >> 1,
-      pageY: 0
-    };
+  api.frame = function (event) {
+    if (!event) {
+      event = {
+        pageX: window.innerWidth >> 1,
+        pageY: 0
+      };
+    }
+
     var i = els.length,
         el;
-
     while (i--) {
       el = els[i];
 
-      var x = (el.pageX === undefined ? e.pageX : el.pageX) - el.x,
-          y = (el.pageY === undefined ? e.pageY : el.pageY) - el.y,
+      var x = (el.pageX === undefined ? event.pageX : el.pageX) - el.x,
+          y = (el.pageY === undefined ? event.pageY : el.pageY) - el.y,
           n = Math.pow(x * x + y * y, power) * k + 1;
 
       if (n > nMax) n = nMax;
@@ -114,17 +123,17 @@
 
   function render(el, angle, n) {
     var shadows = new Array(el.length - 1),
-        cos = Math.cos(angle),
-        sin = Math.sin(angle),
+        dx = Math.sin(angle),
+        dy = Math.cos(angle),
         r;
 
     for (var i = 1; i < el.length; ++i) {
       r = ( el.style === 'flat' ? i : Math.pow(i, n) ) * el.inverse;
       shadows[i - 1] =
-        ( r * sin | 0 ) + 'px '  +
-        ( r * cos | 0 ) + 'px '  +
+        ( r * dx | 0 ) + 'px '  +
+        ( r * dy | 0 ) + 'px '  +
         ( el.style === 'flat' ? 0 : Math.pow(i, 1.7) | 0 ) +
-        'px rgba(' + (el.c || '0,0,0') + ',' + el.opacity + ')' +
+        'px rgba(' + el.color + ',' + el.opacity + ')' +
         el.inset;
     }
 
@@ -136,6 +145,10 @@
     }
   }
 
+  /*
+   * Utils
+   */
+
   function getCenter(el) {
     var x = el.clientWidth  >> 1,
         y = el.clientHeight >> 1;
@@ -146,6 +159,16 @@
     return {x: x, y: y};
   }
 
+  var assign = Object.assign || function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) if (source.hasOwnProperty(key)) {
+        target[key] = source[key];
+      }
+    }
+    return target;
+  };
+
   /*
    * Exporting
    */
@@ -153,24 +176,24 @@
   var exported = false;
 
   if (typeof window.jQuery === 'function') {
-    $.fn.realshadow = init;
+    $.fn.realshadow = api;
     exported = true;
   }
 
   if (typeof define === 'function' && define.amd) {
     define(function () {
-      return init;
+      return api;
     });
     exported = true;
   }
 
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = init;
+    module.exports = api;
     exported = true;
   }
 
   if (!exported) {
-    window.realshadow = init;
+    window.realshadow = api;
   }
 
 })(window);
