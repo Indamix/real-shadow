@@ -11,7 +11,8 @@ h1, h2 {
 	margin-bottom: 0;
 }
 h1 {
-	color: #999;
+  font-size: 2em;
+  font-weight: 200;
 }
 h2 {
     font-weight: 100;
@@ -20,12 +21,19 @@ h2 {
 
 a {
 	color: #66f;
-	text-decoration: none
+}
+
+input[type=checkbox] {
+  margin-right: 6px;
 }
 
 .container {
 	text-align: center;
 	padding: 10px 0;
+}
+
+.wrapper {
+  margin-bottom: 200px;
 }
 
 #navigation a {
@@ -49,13 +57,15 @@ a {
     margin-bottom: 20px;
     z-index: 1;
     position: relative;
+    display: inline-block;
 }
 
 .nav a, .nav label {
+    text-decoration: none;
     display: inline-block;
     padding: 5px;
     width: 140px;
-    margin: 0 10px;
+    margin: 0 5px;
     border-radius: 10px;
     cursor: pointer;
     color: #666;
@@ -67,6 +77,14 @@ a {
 .nav a.current {
     color: #fff;
     background: rgba(0,0,0,.3);
+}
+
+#demo {
+  min-height: 500px;
+}
+
+.promo {
+  margin-bottom: 20px;
 }
 
 /* Box */
@@ -229,7 +247,7 @@ body.drop h1 {
 
 #colors {
     position: absolute;
-    bottom: 50px;
+    bottom: 150px;
     left: 0;
     width: 100%;
     text-align: center;

@@ -1,8 +1,3 @@
-/*
- * This 'app' has been quickly built only to demonstrate the features of Real Shadow
- * To explore the well-structured apps, check out CoreJS http://corejs.github.io/
- */
-
 // rAF polyfill
 (function (w) {
     var lastTime = 0,
@@ -73,8 +68,7 @@
                     'Inverse Direction' +
                 '</label>' +
             '</div>' +
-            '<div class="wrapper">' + html + '</div>' +
-            '<a class="big" href="http://corejs.github.io/">Check my new project, CoreJS<a/>';
+            '<div class="wrapper">' + html + '</div>';
 
         document.body.addEventListener('change', function (e) {
             options[e.target.id] = e.target.checked;
