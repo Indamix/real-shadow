@@ -13,6 +13,18 @@ If there is no CommonJS, AMD or jQuery, Real Shadow registers itself in the glob
 + shadows can be of [any shape](http://indamix.github.io/real-shadow/#/drop/)
 + per-element settings (instead of global settings)
 
+## Installing
+### GitHub
+https://github.com/Indamix/real-shadow
+### npm
+```bash
+npm i real-shadow
+```
+### bower
+```bash
+bower i real-shadow
+```
+
 ## Basic Usage with jQuery
 ```javascript
 $(selector).realshadow(); // options are optional
@@ -139,14 +151,6 @@ realshadow.reset();
 
 // if you use jQuery:
 $.fn.realshadow.reset();
-```
-
-
-## Getting Real Shadow
-Real Shadow is available in [GitHub](https://github.com/Indamix/real-shadow)
-And you can get it using Bower:
-```bash
-bower install real-shadow
 ```
 
 ---
