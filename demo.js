@@ -1,30 +1,3 @@
-// rAF polyfill
-(function (w) {
-    var lastTime = 0,
-        vendors = ['webkit', 'moz'];
-    for (var x = 0; x < vendors.length && !w.requestAnimationFrame; ++x) {
-        w.requestAnimationFrame = w[vendors[x] + 'RequestAnimationFrame'];
-        w.cancelAnimationFrame = w[vendors[x] + 'CancelAnimationFrame'] || w[vendors[x] + 'CancelRequestAnimationFrame'];
-    }
-
-    if (!w.requestAnimationFrame)
-        w.requestAnimationFrame = function (callback) {
-            var currTime = new Date().getTime(),
-                timeToCall = Math.max(0, 16 - (currTime - lastTime)),
-                id = w.setTimeout(function () {
-                    callback(currTime + timeToCall);
-                },
-                timeToCall);
-            lastTime = currTime + timeToCall;
-            return id;
-        };
-
-    if (!w.cancelAnimationFrame)
-        w.cancelAnimationFrame = function (id) {
-            clearTimeout(id);
-        };
-}(window));
-
 (function () {
 
     var box = function () {
@@ -80,7 +53,6 @@
         });
 
         realshadow(document.getElementsByClassName('realshadow'), options);
-        realshadow(document.getElementsByClassName('big'), options);
 
     };
 
@@ -97,7 +69,7 @@
             (tab === 'A' ?
                 '<div id="exampleA">' +
                     '<h2>Shadows can be any shape. Any.</h2>' +
-                    '<p>Shadow shape repeats the element transparency</p>' +
+                    '<p>Shadow shape repeats element transparency</p>' +
                     '<div class="tooltip"></div>' +
                     '<img src="i/window.png"/>' +
                     '<img src="i/phone.png"/>' +
@@ -105,7 +77,7 @@
                 '</div>'
             :
                 '<div id="exampleB">' +
-                    '<a href="http://corejs.github.io/"><img src="i/corejs.png"/></a>' +
+                    '<img src="i/corejs.png"/>' +
                     '<div class="top panel"></div>' +
                     '<div class="right panel"></div>' +
                     '<div class="bottom panel"></div>' +
