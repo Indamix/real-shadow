@@ -87,21 +87,6 @@ label {
 	height: 50px;
 }
 
-.big {
-    background: url(https://raw.github.com/CoreJS/CoreJS/master/app/i/core.png) no-repeat center 35px;
-    color: #690;
-    display: inline-block;
-	width: 380px;
-	height: 110px;
-	padding: 10px;
-	margin-bottom: 200px;
-	border-radius: 10px;
-}
-
-.big:hover {
-    background-color: #fff;
-}
-
 .round  {border-radius:10px}
 .circle {border-radius:30px}
 .ur {border-radius:5px 50px 5px 5px}
